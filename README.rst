@@ -44,8 +44,6 @@ run these examples have been included in the repository.
       NcompX = 10
       sampled_comp, x = qi.linear_eqs(A, b, r, c, rank, Nsamples, NcompX)
 
-where:
-
 Args:
 
 * ``A``: In general, a rectangular matrix
@@ -110,9 +108,7 @@ Returns:
       # to estimate "lambdas[0:rank]".
       sampled_comp, x = qi.linear_eqs_portopt(A, mu, r, c, rank, Nsamples, NcompX)
 
-where:
-
-    Args:
+Args:
 
     * ``A``: In general, a rectangular matrix
     * ``b``: right-hand-side vector b
@@ -148,9 +144,7 @@ Returns:
       NcompX = 10
       sampled_comp, x = qi.recomm_syst(A, user, r, c, rank, Nsamples, NcompX)
 
-where:
-
-    Args:
+Args:
 
     * ``A``: preference matrix
     * ``user``: row index of a specific user in the preference matrix A
@@ -160,9 +154,9 @@ where:
     * ``Nsamples``: number of stochastic samples performed to estimate coefficients ``lambda_l``
     * ``NcompX``: number of entries to be sampled from the solution vector ``A[user, :]``
 
-    Returns:
-        Tuple containing arrays with the ``NcompX`` sampled entries and corresponding elements of
-        the row vector ``A[user, :]``.
+Returns:
+    Tuple containing arrays with the ``NcompX`` sampled entries and corresponding elements of
+    the row vector ``A[user, :]``.
 
 Requirements
 ============
