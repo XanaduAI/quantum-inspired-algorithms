@@ -29,8 +29,7 @@ run these examples have been included in the repository.
 1. Solving a system linear of equations Ax = b.
 
    .. code-block:: python
-      :enphasize-lines: 12
-
+      
       import quantum_inspired as qi
       # load a low-rank random matrix A with dimension 100 x 50
       A = np.load('A.npy')
@@ -58,15 +57,13 @@ Args:
 * ``NcompX``: number of entries to be sampled from the solution vector ``x_tilde``
 
 Returns:
-
-Tuple containing arrays with the ``NcompX`` sampled entries and corresponding components of
-the solution vector ``x_tilde``.
+    Tuple containing arrays with the ``NcompX`` sampled entries and corresponding components of
+    the solution vector ``x_tilde``.
 
 
 2. Portfolio optimization.
 
    .. code-block:: python
-      :enphasize-lines: 43
 
       import quantum_inspired as qi
       # Reading the correlation matrix
@@ -126,14 +123,12 @@ where:
     * ``NcompX``: number of entries to be sampled from the solution vector ``x_tilde``
 
 Returns:
-
     Tuple containing arrays with the ``NcompX`` sampled entries and corresponding components of
     the solution vector ``x_tilde``.
 
 3. Recommendation system.
 
    .. code-block:: python
-      :enphasize-lines: 20
 
       # load a preference matrix A of dimension m x n encoding the rates
       # provided by m = 611 users for n = 9724 movies
@@ -166,7 +161,6 @@ where:
     * ``NcompX``: number of entries to be sampled from the solution vector ``A[user, :]``
 
     Returns:
-
         Tuple containing arrays with the ``NcompX`` sampled entries and corresponding elements of
         the row vector ``A[user, :]``.
 
