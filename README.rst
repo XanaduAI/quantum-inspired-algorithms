@@ -110,13 +110,13 @@ Returns:
 
 Args:
 
-    * ``A``: In general, a rectangular matrix
-    * ``b``: right-hand-side vector b
-    * ``r``: number of sampled rows from matrix A
-    * ``c``: number of sampled columns from matrix A
-    * ``rank``: rank of matrix A
-    * ``Nsamples``: number of stochastic samples performed to estimate coefficients ``lambda_l``
-    * ``NcompX``: number of entries to be sampled from the solution vector ``x_tilde``
+* ``A``: In general, a rectangular matrix
+* ``b``: right-hand-side vector b
+* ``r``: number of sampled rows from matrix A
+* ``c``: number of sampled columns from matrix A
+* ``rank``: rank of matrix A
+* ``Nsamples``: number of stochastic samples performed to estimate coefficients ``lambda_l``
+* ``NcompX``: number of entries to be sampled from the solution vector ``x_tilde``
 
 Returns:
     Tuple containing arrays with the ``NcompX`` sampled entries and corresponding components of
@@ -146,13 +146,13 @@ Returns:
 
 Args:
 
-    * ``A``: preference matrix
-    * ``user``: row index of a specific user in the preference matrix A
-    * ``r``: number of sampled rows from matrix A
-    * ``c``: number of sampled columns from matrix A
-    * ``rank``: rank of matrix A
-    * ``Nsamples``: number of stochastic samples performed to estimate coefficients ``lambda_l``
-    * ``NcompX``: number of entries to be sampled from the solution vector ``A[user, :]``
+* ``A``: preference matrix
+* ``user``: row index of a specific user in the preference matrix A
+* ``r``: number of sampled rows from matrix A
+* ``c``: number of sampled columns from matrix A
+* ``rank``: rank of matrix A
+* ``Nsamples``: number of stochastic samples performed to estimate coefficients ``lambda_l``
+* ``NcompX``: number of entries to be sampled from the solution vector ``A[user, :]``
 
 Returns:
     Tuple containing arrays with the ``NcompX`` sampled entries and corresponding elements of
