@@ -31,6 +31,8 @@ run these examples have been included in the repository.
    .. code-block:: python
       
       import quantum_inspired as qi
+      import numpy as np
+      
       # load a low-rank random matrix A with dimension 100 x 50
       A = np.load('A.npy')
       # load b vector (100 x 1) defining linear system Ax=b
@@ -64,6 +66,8 @@ Returns:
    .. code-block:: python
 
       import quantum_inspired as qi
+      import numpy as np
+      
       # Reading the correlation matrix
       corr_mat = np.load('SnP500_correlation.npy')
       # Reading vector of historical returns
@@ -125,7 +129,10 @@ Returns:
 3. Recommendation system.
 
    .. code-block:: python
-
+   
+      import quantum_inspired as qi
+      import numpy as np
+      
       # load a preference matrix A of dimension m x n encoding the rates
       # provided by m = 611 users for n = 9724 movies
       A = np.load('A_movies_small.npy')
