@@ -362,6 +362,37 @@ def vl_vector(l, A, r, w, rows, sigma, row_norms, A_Frobenius):
     return v_approx
 
 
+def uvl_vector(l, A, r, w, rows, sigma, row_norms, A_Frobenius):
+
+    r""" Function to reconstruct right-singular vector of matrix A
+
+    Args:
+        l (int): singular vector index
+        A (array[complex]): rectangular, in general, complex matrix
+        r (int): number of sampled rows from matrix A
+        w (array[complex]): left-singular vectors of matrix C
+        rows (array[int]): indices of the r sampled rows of matrix A
+        row_norms (array[float]): row norms of matrix A
+        A_Frobenius (float): Frobenius norm of matrix A
+
+    Returns:
+        tuple: Tuple with arrays containing approximated singular vectors :math: '\bm{u}^l, \bm{v}^l'
+    """
+
+    m, n = A.shape
+    u_approx = np.zeros(m)
+    v_approx = np.zeros(n)
+    # building approximated v^l vector
+    factor = A_Frobenius / ( np.sqrt(r) * sigma[l] )
+    for s in range(r):
+        v_approx[:] += ( A[rows[s], :] / np.sqrt(row_norms[rows[s]]) ) * w[s, l]
+    v_approx[:] = v_approx[:] * factor
+
+    u_approx = (A @ v_approx) / sigma[l]
+
+    return u_approx, v_approx
+
+
 # SUBPROGRAM TO COMPUTE APPROXIMATED SOLUTIONS \TILDE X
 def approx_solution(A, rank, r, w, rows, sigma, row_norms, A_Frobenius, lambdas, comp):
 
@@ -431,7 +462,7 @@ def approx_solution_rsys(A, rank, r, w, rows, sigma, row_norms, A_Frobenius, lam
     return approx_value
 
 
-def print_output(r, c, rank, sigma, vl_approx, Nsamples, lambdas, NcompX, sampled_comp, x_tilde,
+def print_output(r, c, rank, sigma, ul_approx, vl_approx, Nsamples, lambdas, NcompX, sampled_comp, x_tilde,
                  rt_ls_prob, rt_sampling_C, rt_building_C, rt_svd_C, rt_sampling_me, rt_sampling_sol):
 
     r""" Function printing out numerical results and running times
@@ -470,6 +501,7 @@ def print_output(r, c, rank, sigma, vl_approx, Nsamples, lambdas, NcompX, sample
         for l in range(rank):
             f.write("{:4d} \t {:20.10f} \n".format(l + 1, sigma[l]))
             np.save("v_l_" + str(l), vl_approx[:, l])
+            np.save("u_l_" + str(l), ul_approx[:, l])
 
     # approximated coefficients lambda_l
     filename = "lambda_l_C_{}_x_{}_rank_{}_Nsamples_{}.out".format(r, c, rank, Nsamples)
@@ -527,9 +559,10 @@ def linear_eqs(A, b, r, c, rank, Nsamples, NcompX):
     sigma = svd_C[2]
 
     # Reconstruction of the right-singular vectors of matrix A
+    ul_approx = np.zeros((m_rows, rank))
     vl_approx = np.zeros((n_cols, rank))
     for l in range(rank):
-        vl_approx[:, l] = vl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
+        ul_approx[:, l], vl_approx[:, l] = uvl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
 
     # 3- Sampling of the matrix elements lambdas[0:rank] = <v^l|A^dagger|b>
     tic = time.time()
@@ -570,7 +603,7 @@ def linear_eqs(A, b, r, c, rank, Nsamples, NcompX):
 
     # 5- Printing out extensive information
 
-    FKV = [r, c, rank, sigma, vl_approx]
+    FKV = [r, c, rank, sigma, ul_approx, vl_approx]
     MC  = [Nsamples, lambdas]
     RS  = [NcompX, sampled_comp, x_tilde]
     RT  = [rt_ls_prob, *svd_C[5:8], rt_sampling_me, rt_sampling_sol]
@@ -615,9 +648,10 @@ def recomm_syst(A, user, r, c, rank, Nsamples, NcompX):
     sigma = svd_C[2]
 
     # Reconstruction of the right-singular vectors of matrix A
+    ul_approx = np.zeros((m_rows, rank))
     vl_approx = np.zeros((n_cols, rank))
     for l in range(rank):
-        vl_approx[:, l] = vl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
+        ul_approx[:, l], vl_approx[:, l] = uvl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
 
     # 3- Sampling of the matrix elements lambdas[0:rank] = <v^l, A[user, :]>
     tic = time.time()
@@ -655,7 +689,7 @@ def recomm_syst(A, user, r, c, rank, Nsamples, NcompX):
 
     # 5- Printing out extensive information
 
-    FKV = [r, c, rank, sigma, vl_approx]
+    FKV = [r, c, rank, sigma, ul_approx, vl_approx]
     MC  = [Nsamples, lambdas]
     RS  = [NcompX, sampled_comp, x_tilde]
     RT  = [rt_ls_prob, *svd_C[5:8], rt_sampling_me, rt_sampling_sol]
@@ -701,9 +735,10 @@ def linear_eqs_portopt(A, mu, r, c, rank, Nsamples, NcompX):
     sigma = svd_C[2]
 
     # Reconstruction of the right-singular vectors of matrix A
+    ul_approx = np.zeros((m_rows, rank))
     vl_approx = np.zeros((n_cols, rank))
     for l in range(rank):
-        vl_approx[:, l] = vl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
+        ul_approx[:, l], vl_approx[:, l] = uvl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
 
     # 3- Sampling of the matrix elements lambdas[0:rank] = <v^l|A^dagger|b>
     tic = time.time()
@@ -742,7 +777,7 @@ def linear_eqs_portopt(A, mu, r, c, rank, Nsamples, NcompX):
 
     # 5- Printing out extensive information
 
-    FKV = [r, c, rank, sigma, vl_approx]
+    FKV = [r, c, rank, sigma, ul_approx, vl_approx]
     MC  = [Nsamples, lambdas]
     RS  = [NcompX, sampled_comp, x_tilde]
     RT  = [rt_ls_prob, *svd_C[5:8], rt_sampling_me, rt_sampling_sol]
@@ -788,9 +823,10 @@ def linear_eqs_fkv(A, b, r, c, rank):
     rt_svd_C = svd_C[7]
 
     # Reconstruction of the right-singular vectors of matrix A
+    ul_approx = np.zeros((m_rows, rank))
     vl_approx = np.zeros((n_cols, rank))
     for l in range(rank):
-        vl_approx[:, l] = vl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
+        ul_approx[:, l], vl_approx[:, l] = uvl_vector(l, A, r, w, svd_C[1], sigma, LS[0], LS[3])
 
     # 3- Direct calculation of matrix elements lambdas[rank] = <v^l|A^dagger|b>
     tic = time.time()
@@ -825,6 +861,7 @@ def linear_eqs_fkv(A, b, r, c, rank):
         for l in range(rank):
             f.write("{:4d} \t {:20.10f} \n" .format(l + 1, sigma[l]))
             np.save("v_l_" + str(l), vl_approx[:, l])
+            np.save("u_l_" + str(l), ul_approx[:, l])
 
     # Coefficients lambda_l = <v_l|A^+|b>
     filename = "lambda_l_C_{}_x_{}_rank_{}.out".format(r, c, rank)
