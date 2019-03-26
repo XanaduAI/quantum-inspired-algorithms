@@ -177,8 +177,8 @@ Juan Miguel Arrazola, Alain Delgado, Bhaskar Roy Bardhan, Seth Lloyd
 
 If you are doing any research using this source code, please cite the following paper:
 
-> Juan Miguel Arrazola, Alain Delgado, Bhaskar Roy Bardhan, Seth Lloyd.
-Practical performance of quantum-inspired algorithms for linear algebra. arXiv, 2019. [arXiv:to be defined](https://arxiv.org/abs/1809.04680)
+  Juan Miguel Arrazola, Alain Delgado, Bhaskar Roy Bardhan, Seth Lloyd.
+  Practical performance of quantum-inspired algorithms for linear algebra. arXiv, 2019. `arXiv:to be defined <https://arxiv.org/abs/1809.04680>`_
 
 License
 =======
