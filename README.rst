@@ -33,17 +33,17 @@ run these examples have been included in the repository.
       import quantum_inspired as qi
       import numpy as np
       
-      # load a low-rank random matrix A with dimension 100 x 50
+      # load a low-rank random matrix A with dimension 500 x 250
       A = np.load('A.npy')
-      # load b vector (100 x 1) defining linear system Ax=b
+      # load b vector (500 x 1) defining linear system Ax=b
       b = np.load('b.npy')
       # rank of matrix A
-      rank = 5
+      rank = 3
       # Input parameters for the quantum inspired algorithm
-      r = 80
-      c = 50
-      Nsamples = 10
-      NcompX = 10
+      r = 200
+      c = 200
+      Nsamples = 50
+      NcompX = 50
       sampled_comp, x = qi.linear_eqs(A, b, r, c, rank, Nsamples, NcompX)
 
 Args:
