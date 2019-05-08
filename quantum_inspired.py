@@ -322,10 +322,8 @@ def sample_from_x(A, r, n, rows, row_norms, LS_prob_columns_R, A_Frobenius, w_ve
         # probability to select j_sample as output
         prob = (Rw_dot / (w_norm * R_j_norm))**2
 
-        # print('still here!!!')
-
         # determine if we output j_sample given above probability
-        coin = np.random.binomial(2, prob)
+        coin = np.random.binomial(1, prob)
         if coin == 1:
             out_j = j_sample
             # if we get heads from coin, then stop while loop
@@ -577,11 +575,8 @@ def linear_eqs(A, b, r, c, rank, Nsamples, NcompX):
     w_vector = np.zeros(r)
     for l in range(rank):
         w_vector[:] += (lambdas[l] / sigma[l] ** 3) * w[:, l]
-        # print(lambdas[l], sigma[l])
 
     w_norm = la.norm(w_vector)
-    # print(w_norm)
-    # exit()
 
     # create array to stored the sampled components
     sampled_comp = np.zeros(NcompX, dtype=np.uint32)
@@ -601,7 +596,7 @@ def linear_eqs(A, b, r, c, rank, Nsamples, NcompX):
 
     RT = [rt_ls_prob, *svd_C[5:8], rt_sampling_me, rt_sampling_sol]
 
-    # 5- Printing out extensive information
+    # 5- Printing output of the algorithm
 
     FKV = [r, c, rank, sigma, ul_approx, vl_approx]
     MC  = [Nsamples, lambdas]
