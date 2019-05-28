@@ -177,7 +177,7 @@ Juan Miguel Arrazola, Alain Delgado, Bhaskar Roy Bardhan, Seth Lloyd
 If you are doing any research using this source code, please cite the following paper:
 
   Juan Miguel Arrazola, Alain Delgado, Bhaskar Roy Bardhan, Seth Lloyd.
-  Quantum-inspired algorithms in practice. arXiv, 2019. `arXiv:to be defined <https://arxiv.org/abs/1809.04680>`_
+  Quantum-inspired algorithms in practice. arXiv, 2019. `arXiv:1905.10415 <https://arxiv.org/abs/1905.10415>`_
 
 License
 =======
