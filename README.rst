@@ -6,8 +6,7 @@ and to recommendation system
 
 The repository contains all source code used to generate results
 presented in `"Practical performance of quantum-inspired algorithms
-for linear algebra"
-[arXiv:to_be_specified] <https://arxiv.org/abs/to_be_specified>`_.
+for linear algebra" <https://arxiv.org/abs/1905.10415>`_.
 
 Contents
 ========
