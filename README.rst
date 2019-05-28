@@ -5,8 +5,7 @@ Applying quantum-inspired algorithms to solve systems of linear equations
 and to recommendation system
 
 The repository contains all source code used to generate results
-presented in `"Practical performance of quantum-inspired algorithms
-for linear algebra" <https://arxiv.org/abs/1905.10415>`_.
+presented in `"Quantum-inspired algorithms in practice" <https://arxiv.org/abs/1905.10415>`_.
 
 Contents
 ========
