@@ -1,8 +1,8 @@
-Quantum-inspired algorithms for linear algebra
+Quantum-inspired algorithms in practice
 ##############################################
 
-Applying quantum-inspired algorithms to solve systems of linear equations
-and to recommendation system
+Quantum-inspired algorithms to solve systems of linear equations
+and to implement recommendation systems
 
 The repository contains all source code used to generate results
 presented in `"Quantum-inspired algorithms in practice" <https://arxiv.org/abs/1905.10415>`_.
@@ -12,16 +12,16 @@ Contents
 
 * ``quantum_inspired.py``: a Python module containing all functions composing the
   quantum-inspired algorithm. It contains three driver subroutines
-  to use the implemented algorithms to address three practical applications:
-  i)   to solve a general system of linear equations Ax = b,
-  ii)  to optimize an investment portfolio across various assets, and
-  iii) to recommend items to a given user based on an input preference matrix.
+  to use the implemented algorithms for the following applications:
+  i)   solving a system of linear equations Ax = b,
+  ii)  portfolio optimization,
+  iii) recommendation systems.
 
 Usage and examples
 ==================
 
-Below we describe usage of the module to tackle the above mentioned applications.
-Notice that the first thing to do is to import the module. All input data required to
+Below we describe usage of the module to tackle these applications.
+First thing to do is to import the module. All input data required to
 run these examples have been included in the repository.
 
 1. Solving a system linear of equations Ax = b.
@@ -93,7 +93,7 @@ Returns:
       b[0] = mu
 
       # This defines a portfolio optimization problem Ax = b
-      # where x = [\nu, \vec{\omega}] with \vec{\omega} being the
+      # where x = [\nu, \vec{\omega}] and \vec{\omega} is the
       # portfolio allocation vector
 
       # low-rank approximation of matrix A
@@ -104,7 +104,7 @@ Returns:
       Nsamples = 10
       NcompX = 10
 
-      # Notice that this function receive "mu" instead of the whole vector "b"
+      # Notice that this function receives "mu" instead of the whole vector "b"
       # as the general coefficient <v_l|A^+|b> reduces to the inner product <mu*A_0., v_l>.
       # The latter allow us to reduce significantly the number of stochastic samples performed
       # to estimate "lambdas[0:rank]".
@@ -135,7 +135,7 @@ Returns:
       # provided by m = 611 users for n = 9724 movies
       A = np.load('A_movies_small.npy')
 
-      # In this example we wan to reconstruct the full row of matrix A corresponding
+      # In this example we want to reconstruct the full row of matrix A corresponding
       # to a specific user (416 in this case) and use highest components of the
       # reconstructed row vector to recommend new movies
       user = 416
